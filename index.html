@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahad Masood - Web Developer</title>
+<style>
+  * { box-sizing: border-box; }
+  body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0a0a0a;
+    scroll-behavior: smooth;
+  }
+  .container{
+    padding: 10px 10%;
+  }
+
+  /* ---------- Header ---------- */
+  #header{
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle at top right, #1a1a1a, #000000 70%);
+    position: relative;
+  }
+  nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 25px 0;
+  }
+  .logo{
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  .logo span{ color:#ff004f; }
+  nav ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  nav ul li{
+    margin: 0 18px;
+    list-style: none;
+  }
+  nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  nav ul li a::after{
+    content:'';
+    width:0%;
+    height:3px;
+    background:#ff004f;
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    transition:width 0.3s ease;
+  }
+  nav ul li a:hover::after{ width:100%; }
+  .menu-toggle{ display:none; font-size:28px; color:#fff; cursor:pointer; }
+
+  .header-text{
+    color:#fff;
+    margin-top:12%;
+    max-width:650px;
+  }
+  .header-text .greeting{
+    font-size:20px;
+    color:#ff004f;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+  .header-text h1{
+    font-size:58px;
+    margin:15px 0;
+    line-height:1.2;
+  }
+  .header-text h1 span{ color:#ff004f; }
+  .header-text p{
+    font-size:18px;
+    color:#ababab;
+    line-height:1.6;
+    max-width:550px;
+  }
+  .btn-group{ margin-top:30px; }
+  .btn{
+    display:inline-block;
+    padding:12px 28px;
+    border:2px solid #ff004f;
+    border-radius:30px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    margin-right:15px;
+    transition: all 0.3s ease;
+  }
+  .btn:hover{ background:#ff004f; }
+  .btn.solid{ background:#ff004f; }
+  .btn.solid:hover{ background:transparent; }
+
+  /* ---------- Section headings ---------- */
+  .sub-title{
+    font-size:46px;
+    font-weight:700;
+    color:#fff;
+    margin-bottom:10px;
+    text-align:center;
+  }
+  .section-tag{
+    text-align:center;
+    color:#ff004f;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+    font-size:14px;
+  }
+
+  /* ---------- About ---------- */
+  #about{
+    padding:100px 0;
+    color:#ababab;
+  }
+  .row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-top:50px;
+  }
+  .about-col-1{ flex-basis:35%; margin-bottom:30px; }
+  .about-col-1 .img-placeholder{
+    width:100%;
+    height:420px;
+    border-radius:15px;
+    background:linear-gradient(145deg,#1a1a1a,#2a2a2a);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#666;
+    font-size:16px;
+    border:1px dashed #444;
+  }
+  .about-col-2{ flex-basis:60%; }
+  .about-col-2 p{
+    font-size:16px;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .tab-titles{ display:flex; margin:25px 0; flex-wrap:wrap; }
+  .tab-link{
+    margin-right:40px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    position:relative;
+    color:#888;
+    transition:color 0.3s ease;
+    padding-bottom:8px;
+  }
+  .tab-link:hover{ color:#fff; }
+  .tab-link::after{
+    content:'';
+    width:0;
+    height:3px;
+    background:#ff004f;
+    position:absolute;
+    left:0;
+    bottom:0;
+    transition:width 0.4s ease;
+  }
+  .tab-link.active-link{ color:#ff004f; }
+  .tab-link.active-link::after{ width:50%; }
+  .tab-content{ display:none; }
+  .tab-content.active-tab{ display:block; animation: fadeIn 0.5s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .tab-content ul{ padding:0; margin:0; display:grid; gap:14px; }
+  .tab-content ul li{
+    list-style:none;
+    background:#131313;
+    padding:14px 18px;
+    border-radius:10px;
+    border-left:3px solid #ff004f;
+  }
+  .tab-content ul li span{
+    color:#ff004f;
+    font-weight:bold;
+    font-size:15px;
+    display:block;
+    margin-bottom:4px;
+  }
+
+  /* ---------- Services ---------- */
+  #services{
+    padding:100px 0;
+    background:#0d0d0d;
+  }
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:30px;
+    margin-top:50px;
+  }
+  .service-card{
+    background:#131313;
+    padding:35px 28px;
+    border-radius:15px;
+    border:1px solid #222;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-8px);
+    border-color:#ff004f;
+  }
+  .service-icon{
+    font-size:34px;
+    margin-bottom:18px;
+  }
+  .service-card h3{
+    color:#fff;
+    font-size:20px;
+    margin-bottom:12px;
+  }
+  .service-card p{
+    color:#ababab;
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  /* ---------- Contact ---------- */
+  #contact{
+    padding:100px 0;
+  }
+  .contact-wrapper{
+    display:flex;
+    flex-wrap:wrap;
+    gap:50px;
+    margin-top:50px;
+  }
+  .contact-info{
+    flex:1;
+    min-width:280px;
+  }
+  .contact-item{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:28px;
+    color:#ababab;
+  }
+  .contact-icon{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#131313;
+    border:1px solid #ff004f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    flex-shrink:0;
+    color:#ff004f;
+  }
+  .contact-item h4{
+    color:#fff;
+    margin:0 0 4px 0;
+    font-size:16px;
+  }
+  .contact-item p, .contact-item a{
+    color:#ababab;
+    text-decoration:none;
+    font-size:15px;
+  }
+  .contact-item a:hover{ color:#ff004f; }
+  .contact-form{
+    flex:1;
+    min-width:280px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .contact-form input, .contact-form textarea{
+    width:100%;
+    padding:14px 16px;
+    background:#131313;
+    border:1px solid #222;
+    border-radius:8px;
+    color:#fff;
+    font-size:15px;
+    font-family:inherit;
+  }
+  .contact-form input:focus, .contact-form textarea:focus{
+    outline:none;
+    border-color:#ff004f;
+  }
+  .contact-form textarea{ resize:vertical; min-height:130px; }
+  .contact-form button{
+    padding:14px;
+    background:#ff004f;
+    border:none;
+    border-radius:8px;
+    color:#fff;
+    font-weight:600;
+    font-size:16px;
+    cursor:pointer;
+    transition:background 0.3s ease;
+  }
+  .contact-form button:hover{ background:#d40040; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:#0d0d0d;
+    padding:30px 0;
+    text-align:center;
+    color:#666;
+    font-size:14px;
+    border-top:1px solid #1a1a1a;
+  }
+  footer a{ color:#ff004f; text-decoration:none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px) {
+    nav ul{
+      display:none;
+      flex-direction:column;
+      width:100%;
+      background:#0a0a0a;
+      position:absolute;
+      top:70px;
+      left:0;
+      padding:20px 10%;
+    }
+    nav ul.show{ display:flex; }
+    nav ul li{ margin:12px 0; }
+    .menu-toggle{ display:block; }
+    .header-text h1{ font-size:38px; }
+    .row{ flex-direction:column; }
+    .about-col-1, .about-col-2{ flex-basis:100%; }
+    .sub-title{ font-size:34px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div class="container">
+    <nav>
+      <div class="logo">Mahad<span>.</span></div>
+      <div class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('show')">☰</div>
+      <ul id="navlinks">
+        <li><a href="#header">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-text">
+      <div class="greeting">Welcome to my portfolio</div>
+      <h1>Hi, I'm <span>Mahad</span><br>Masood from Pakistan</h1>
+      <p>Web developer studying in Tbilisi, Georgia, currently based in Riyadh, Saudi Arabia. I build clean, functional websites and enjoy working across the full stack.</p>
+      <div class="btn-group">
+        <a href="#contact" class="btn solid">Hire Me</a>
+        <a href="#about" class="btn">Learn More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== About ===== -->
+<div id="about">
+  <div class="container">
+    <div class="section-tag">Get To Know</div>
+    <h1 class="sub-title">About Me</h1>
+    <div class="row">
+      <div class="about-col-1">
+        <div class="img-placeholder">Profile Photo</div>
+      </div>
+      <div class="about-col-2">
+        <p>Hi, I'm Mahad Masood, a passionate web developer from Pakistan. I love creating beautiful and functional websites that provide great user experiences. With a keen eye for design and a strong understanding of web technologies, I strive to bring ideas to life on the web.</p>
+        <p>In my free time, I enjoy exploring new technologies, learning about the latest trends in web development, and working on personal projects that challenge my skills. I'm always eager to collaborate with others and share knowledge within the web development community.</p>
+
+        <div class="tab-titles">
+          <p class="tab-link active-link" onclick="opentab('skills', this)">Skills</p>
+          <p class="tab-link" onclick="opentab('experience', this)">Experience</p>
+          <p class="tab-link" onclick="opentab('education', this)">Education</p>
+        </div>
+
+        <div class="tab-content active-tab" id="skills">
+          <ul>
+            <li><span>UI/UX</span>HTML, CSS, JavaScript</li>
+            <li><span>Backend</span>Node.js, Express, MongoDB</li>
+            <li><span>Tools</span>Git, VS Code, Figma</li>
+          </ul>
+        </div>
+
+        <div class="tab-content" id="experience">
+          <ul>
+            <li><span>Web Developer</span>Freelance Projects</li>
+            <li><span>Intern</span>ABC Tech Solutions</li>
+            <li><span>Open Source Contributor</span>Various Projects</li>
+          </ul>
+        </div>
+
+        <div class="tab-content" id="education">
+          <ul>
+            <li><span>Bachelor's Degree</span>Computer Science, Tbilisi State University, Georgia</li>
+            <li><span>Certification</span>Web Development Bootcamp</li>
+            <li><span>Online Courses</span>Various Platforms</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Services ===== -->
+<div id="services">
+  <div class="container">
+    <div class="section-tag">What I Do</div>
+    <h1 class="sub-title">Services</h1>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>Web Development</h3>
+        <p>Building responsive, fast, and reliable websites from scratch using modern front-end and back-end technologies.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Designing clean, user-friendly interfaces that focus on usability, accessibility, and a great overall experience.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Systems Design</h3>
+        <p>Architecting backend systems and databases that are scalable, maintainable, and built to handle real-world load.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔌</div>
+        <h3>API Development</h3>
+        <p>Building and integrating REST APIs to connect front-end applications with databases and third-party services.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛠️</div>
+        <h3>Maintenance & Support</h3>
+        <p>Ongoing bug fixes, performance improvements, and feature updates for existing websites and applications.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚀</div>
+        <h3>Deployment & Optimization</h3>
+        <p>Getting projects live with proper hosting setup, performance tuning, and SEO-friendly optimization.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Contact ===== -->
+<div id="contact">
+  <div class="container">
+    <div class="section-tag">Get In Touch</div>
+    <h1 class="sub-title">Contact Me</h1>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:mahadmusood12345@gmail.com">mahadmusood12345@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Based In</h4>
+            <p>Riyadh, Saudi Arabia</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🎓</div>
+          <div>
+            <h4>Studying In</h4>
+            <p>Tbilisi, Georgia</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🐙</div>
+          <div>
+            <h4>GitHub</h4>
+            <a href="https://github.com/Mahad-afk" target="_blank">github.com/yourusername</a>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Message ready to send! Connect a backend or service like Formspree to make this functional.');">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 Mahad Masood. All rights reserved. | <a href="mailto:mahadmusood12345@gmail.com">mahadmusood12345@gmail.com</a></p>
+</footer>
+
+<script>
+function opentab(tabname, el){
+  const tablinks = document.getElementsByClassName('tab-link');
+  for(let i=0; i<tablinks.length; i++){
+    tablinks[i].classList.remove('active-link');
+  }
+  const tabcontents = document.getElementsByClassName('tab-content');
+  for(let i=0; i<tabcontents.length; i++){
+    tabcontents[i].classList.remove('active-tab');
+  }
+  document.getElementById(tabname).classList.add('active-tab');
+  el.classList.add('active-link');
+}
+</script>
+</body>
+</html>
